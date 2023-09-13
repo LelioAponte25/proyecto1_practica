@@ -23,7 +23,7 @@ function App() {
   const [inputValue, setInputValue] = useState('')
   const apiKey = 'zGGLYk9SdWXfqzhK4wS6j1Oxw93Xs5JbmLUB7GTi'
   const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${inputValue}`
-  const [infoApi, getApi] = useFetch(url)
+  const [infoApi, getApi, hasError] = useFetch(url)
 
 
 
@@ -47,9 +47,12 @@ function App() {
         <input ref={inputDate} type="text" />
         <button>Search</button>
       </form>
-    <ImageInfo
-    infoApi={infoApi}
-    />
+      {hasError 
+      ? <h2>🚨Enter The Date in The Format Of YY/MM/DD</h2>
+        : <ImageInfo
+        infoApi={infoApi}
+        />
+      }
     </div>
   )
 }
