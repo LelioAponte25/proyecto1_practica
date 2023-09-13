@@ -50,9 +50,18 @@ function App() {
         ) 
         : (
           <>
+        <h2>NASA App</h2>
+        <h1>
+        BUSCA LA IMAGEN ASTRONOMICA DEL DIA
+        </h1>
           <form onSubmit={handleDate}>
-            <input ref={inputDate} type="text" />
-            <button>Search</button>
+          <h3>ingresa una fecha</h3>
+            <input ref={inputDate} className='input__search' placeholder="Search" type="text" />
+          <button>
+            <span class="transition"></span>
+            <span class="gradient"></span>
+            <span class="label">Search</span>
+          </button>
           </form>
           {hasError 
           ? <h2>🚨Enter The Date in The Format Of YY-MM-DD <br /> <span>❌Star Date: 1995-07-10</span></h2>
