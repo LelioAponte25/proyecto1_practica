@@ -5,8 +5,9 @@ const ImageInfo = ({infoApi}) => {
     <article>
         <h2>{infoApi?.title}</h2>
         <h3>{infoApi?.date}</h3>
-        <h2 className='explanation'>{infoApi?.explanation}</h2>
+        <p className='explanation' >{infoApi?.explanation}</p>
         <img src={infoApi?.hdurl} alt="" />
+        <h3>{infoApi?.copyright}</h3>
     </article>
 )
 }

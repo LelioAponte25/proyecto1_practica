@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import useFetch from './hooks/useFetch'
 import ImageInfo from './components/ImageInfo'
+import Loading from './components/Loading'
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
   const [inputValue, setInputValue] = useState('')
   const apiKey = 'zGGLYk9SdWXfqzhK4wS6j1Oxw93Xs5JbmLUB7GTi'
   const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${inputValue}`
-  const [infoApi, getApi, hasError] = useFetch(url)
+  const [infoApi, getApi, hasError, isloading] = useFetch(url)
 
 
 
@@ -43,16 +44,24 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={handleDate}>
-        <input ref={inputDate} type="text" />
-        <button>Search</button>
-      </form>
-      {hasError 
-      ? <h2>🚨Enter The Date in The Format Of YY/MM/DD</h2>
-        : <ImageInfo
-        infoApi={infoApi}
-        />
-      }
+      {
+        isloading ? (
+          <Loading/>
+        ) 
+        : (
+          <>
+          <form onSubmit={handleDate}>
+            <input ref={inputDate} type="text" />
+            <button>Search</button>
+          </form>
+          {hasError 
+          ? <h2>🚨Enter The Date in The Format Of YY-MM-DD <br /> <span>❌Star Date: 1995-07-10</span></h2>
+            : (<ImageInfo
+            infoApi={infoApi}
+            />
+          )}
+          </>
+        )}
     </div>
   )
 }

@@ -4,8 +4,10 @@ import axios from 'axios'
 const useFetch = (url) => {
         const [infoApi, setInfoApi] = useState()
         const [hasError, setHasError] = useState()
+        const [isloading, setIsloading] = useState()
 
         const getApi = () => {
+            setIsloading(true)
             axios.get(url)
             .then(res => {
                 setInfoApi(res.data)
@@ -15,9 +17,11 @@ const useFetch = (url) => {
                 console.log(err)
                 setHasError(true)
             })
+
+            .finally(() => setIsloading(false))
         }
 
-        return [infoApi, getApi, hasError]
+        return [infoApi, getApi, hasError, isloading ]
 }
 
 export default useFetch
